@@ -1,11 +1,10 @@
 # import our helpers
-from utils import load, show, day, TRACE, Map, Path, USING_EXAMPLE
+from utils import show, Map, USING_EXAMPLE, get_input_2023
 from pathlib import Path
 ####### GLOBALS #########
 
 # load todays input
-TEXT = (Path(__file__).parent / "input" /
-    "adventofcode.com_2023_day_2_input.txt").read_text()
+TEXT = get_input_2023(Path(__file__))
 
 ######## Part 1 ##########
 

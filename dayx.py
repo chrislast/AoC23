@@ -1,24 +1,17 @@
 # import our helpers
-from types import SimpleNamespace
-from utils import load, show, TRACE, Map, Path, USING_EXAMPLE
+from utils import show, Map, USING_EXAMPLE, NS, get_input_2023
 from pathlib import Path
 from dataclasses import dataclass
 ####### GLOBALS #########
 
 # load todays input
-HERE = Path(__file__)
-DAY = HERE.stem[3:]
-INPUT = HERE.parent / "input" / f"adventofcode.com_2023_day_{DAY}_input.txt"
-if INPUT.exists():
-    TEXT = INPUT.read_text()
-else:
-    INPUT = None
-# convenient for passing working between parts 1 and 2, and relevant stuff to vizualations 
-NS = SimpleNamespace()
+TEXT = get_input_2023(Path(__file__))
 
 # parse the input (usually)
 def parse(line):
-    """simple text parser"""
+    """
+    fmt
+    """
     a,b,*c = line.split()
     return a, int(b[:-1]), ' '.join(c)
 
@@ -28,10 +21,10 @@ class A:
     b : int
     c : list
 
-if INPUT:
+if TEXT:
     PARSED = [A(*parse(_)) for _ in TEXT.splitlines()]
-    MAP = Map(TEXT.splitlines())
-    MAP.show()
+    #MAP = Map(TEXT.splitlines())
+    #MAP.show()
     breakpoint()
 
 # Visualize a 2D map
@@ -57,7 +50,6 @@ if INPUT:
 
 ######## Part 1 ##########
 def p1(expect=0 if not USING_EXAMPLE else 0):
-    breakpoint()
     return 0
 
 ######## Part 2 ##########

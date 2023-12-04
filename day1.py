@@ -1,12 +1,11 @@
 # import our helpers
-from utils import load, show, day, TRACE, Map, Path, USING_EXAMPLE
+from utils import show, USING_EXAMPLE, get_input_2023
 from pathlib import Path
 
 ####### GLOBALS #########
 
 # load todays input data as a docstring
-TEXT = (Path(__file__).parent / "input" /
-    "adventofcode.com_2023_day_1_input.txt").read_text()
+TEXT = get_input_2023(Path(__file__))
 
 DIGITS = {'one': '1', 'two': '2', 'three': '3', '1':'1', '2':'2', '3':'3',
           'four': '4', 'five': '5', 'six': '6', '4':'4', '5':'5','6':'6', 

@@ -1,6 +1,5 @@
 import sys
 from pathlib import Path
-import pdb
 import time
 from types import SimpleNamespace
 import random
@@ -10,6 +9,22 @@ import numpy as np
 # globals
 NS = SimpleNamespace()
 USING_EXAMPLE = len(sys.argv)>1
+
+def get_input(fpth, inp):
+    day = fpth.stem[3:]
+    if USING_EXAMPLE:
+        example = fpth.parent / "examples" / f"{day}-{sys.argv[1]}.txt"
+        return example.read_text().strip()
+    else:
+        if inp.exists():
+            return inp.read_text().strip()
+    print("No puzzle input!")
+    return None
+
+def get_input_2023(fpth):
+    day = fpth.stem[3:]
+    inp = fpth.parent / "input" / f"adventofcode.com_2023_day_{day}_input.txt"
+    return get_input(fpth,inp)
 
 TESTS = SimpleNamespace(
     FAILED = 0,
@@ -137,8 +152,6 @@ class Map:
 
 ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-TRACE=pdb.set_trace
-
 def load(n):
     if len(sys.argv) == 1:
         f = Path(__file__).parent / "input" / f"{n}.txt"
@@ -147,10 +160,6 @@ def load(n):
     if f.is_file():
         return f.read_text()
     return ''
-
-def day(ospath):
-    n = int(Path(ospath).stem[3:])
-    return n
 
 def show(*funcs, compact=False):
     part = 1

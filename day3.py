@@ -1,29 +1,11 @@
 # import our helpers
-from types import SimpleNamespace
-from utils import load, show, TRACE, Map, Path, USING_EXAMPLE
+from utils import show, Map, USING_EXAMPLE, get_input_2023
 from pathlib import Path
 from dataclasses import dataclass
 ####### GLOBALS #########
 
 # load todays input
-HERE = Path(__file__)
-DAY = HERE.stem[3:]
-INPUT = HERE.parent / "input" / f"adventofcode.com_2023_day_{DAY}_input.txt"
-if INPUT.exists():
-    TEXT = INPUT.read_text()
-
-TEXT="""
-467..114..
-...*......
-..35..633.
-......#...
-617*......
-.....+.58.
-..592.....
-......755.
-...$.*....
-.664.598..
-"""
+TEXT = get_input_2023(Path(__file__))
 
 SYMBOLS = set(TEXT) - set("0123456789.\n")
 TEXT = TEXT.strip().splitlines()
@@ -35,7 +17,7 @@ np.set_printoptions(threshold=np.inf)
 A = np.zeros((SZ,SZ), dtype="uint8") # 3D Array
 for y, line in enumerate(TEXT):
     A[y,:] = bytearray(line,"ascii")
-Map(A).show()
+#Map(A).show()
 
 def is_digit(c):
     return 0x30 <= c <= 0x39
