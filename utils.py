@@ -10,6 +10,8 @@ import numpy as np
 NS = SimpleNamespace()
 USING_EXAMPLE = len(sys.argv)>1
 
+np.set_printoptions(threshold=np.inf)
+
 def get_input(fpth, inp):
     day = fpth.stem[3:]
     if USING_EXAMPLE:

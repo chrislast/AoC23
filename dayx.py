@@ -29,8 +29,10 @@ if TEXT:
 
 # Visualize a 2D map
 # import numpy as np
-# np.set_printoptions(threshold=np.inf)
 # ARRAY = np.zeros((z,y,x), dtype="uint8") # 3D Array
+# ARRAY = np.zeros((y,x), dtype="uint8") # 2D Array
+# for y, line in enumerate(TEXT):
+#     ARRAY[y,:] = bytearray(line, "ascii")
 # ARRAY_SLICE = ARRAY[0:2,0:3,22:26] # 2 layers, 3 rows, 4 columns
 # ARRAY_SLICE = ARRAY[0:2,:,22:26] # 2 layers, all rows, 4 columns
 # Map(ARRAY_SLICE).show()
