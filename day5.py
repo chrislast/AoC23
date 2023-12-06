@@ -6,45 +6,10 @@ from dataclasses import dataclass
 
 # load todays input
 TEXT = get_input_2023(Path(__file__)).strip().splitlines()
-xTEXT = """
-seeds: 79 14 55 13
-
-seed-to-soil map:
-50 98 2
-52 50 48
-
-soil-to-fertilizer map:
-0 15 37
-37 52 2
-39 0 15
-
-fertilizer-to-water map:
-49 53 8
-0 11 42
-42 0 7
-57 7 4
-
-water-to-light map:
-88 18 7
-18 25 70
-
-light-to-temperature map:
-45 77 23
-81 45 19
-68 64 13
-
-temperature-to-humidity map:
-0 69 1
-1 0 69
-
-humidity-to-location map:
-60 56 37
-56 93 4""".strip().splitlines()
-
 SEEDS = list(map(int,TEXT[0].split()[1:]))
 
 @dataclass
-class K2S:
+class Mapper:
     name: str
     rules: list
 
@@ -60,8 +25,8 @@ class K2S:
                 return src + (n-dst)
         return n
 
+# list of Mapper mapping objects
 X2Y = []
-
 for line in TEXT[2:]:
     if line.strip():
         if line.strip() in """
@@ -73,7 +38,7 @@ for line in TEXT[2:]:
             temperature-to-humidity map:
             humidity-to-location map:
             """:
-            key = K2S(line.split()[0],[])
+            key = Mapper(line.split()[0],[])
             X2Y.append(key)
         elif line:
             key.rules.append(list(map(int,line.split())))
@@ -114,7 +79,7 @@ def p1(expect=525792406 if not USING_EXAMPLE else 35):
 # so I'll check those first! pretty sure that won't be a general solution though
 def p2(expect=79004094 if not USING_EXAMPLE else 46):
     BRUTE_FORCE = False
-    if BRUTE_FORCE:
+    if BRUTE_FORCE or USING_EXAMPLE:
         n = 0
         while True:
             if is_seed(location2seed(n)):
