@@ -5,6 +5,7 @@ from types import SimpleNamespace
 import random
 from PIL import Image
 import numpy as np
+import traceback
 
 # globals
 NS = SimpleNamespace()
@@ -167,7 +168,12 @@ def show(*funcs, compact=False):
     part = 1
     for func in funcs:
         t1 = time.time()
-        ret = func()
+        try:
+            # resolve a solution
+            ret = func()
+        except Exception as exc:
+            # catch any exception and replace it with a stacktrace
+            ret = "    " + (''.join(traceback.format_exception(exc))).replace("\n","\n        ")
         elapsed = time.time()-t1
         if ret is None:
             TESTS.SKIPPED += 1
