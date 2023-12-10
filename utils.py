@@ -182,7 +182,8 @@ def show(*funcs, compact=False):
         expect = None
         try:
             expect = func.__defaults__[0]
-        except TypeError:
+            expect = expect[int(sys.argv[1])-1]
+        except (TypeError, AttributeError, IndexError):
             pass
         if expect:
             if ret == expect:
@@ -249,3 +250,26 @@ def flatten(iterable):
         else:
             result.append(item)
     return tuple(result)
+
+def batched(iterable, batch_size, strict=True, cast=None):
+    """
+    split an interable into batches of `batch_size` iterables
+    e.g. batched("ABCDEFG",3,False) --> ["ABC","DEF","G"]
+    """
+    idx = 0
+    batches = []
+    while True:
+        batch = iterable[idx:idx+batch_size]
+        if not batch:
+            break
+        if strict:
+            if len(batch) != batch_size:
+                raise ValueError(
+                    f"{batches}\n+ "
+                    f"{batch}\nExpected {batch_size} elements not "
+                    f"{len(batch)}")
+        if cast:
+            batch = cast(batch)
+        batches.append(batch)
+        idx += batch_size
+    return batches
