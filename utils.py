@@ -22,7 +22,7 @@ def get_input(fpth, inp):
         if inp.exists():
             return inp.read_text().strip()
     print("No puzzle input!")
-    return None
+    return ""
 
 def get_input_2023(fpth):
     day = fpth.stem[3:]

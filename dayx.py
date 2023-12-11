@@ -5,7 +5,7 @@ from dataclasses import dataclass
 ####### GLOBALS #########
 
 # load todays input
-TEXT = get_input_2023(Path(__file__))
+TEXT = get_input_2023(Path(__file__)).splitlines()
 
 # parse the input (usually)
 def parse(line):
@@ -22,8 +22,8 @@ class A:
     c : list
 
 if TEXT:
-    PARSED = [A(*parse(_)) for _ in TEXT.splitlines()]
-    #MAP = Map(TEXT.splitlines())
+    PARSED = [A(*parse(_)) for _ in TEXT]
+    #MAP = Map(TEXT)
     #MAP.show()
     breakpoint()
 
