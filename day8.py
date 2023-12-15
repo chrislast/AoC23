@@ -40,7 +40,6 @@ def get_steps(s,e):
 def p1(_x=22357 if not USING_EXAMPLE else [2,6,0]):
     return get_steps("AAA","ZZZ")
 
-#from collections import combinations
 ######## Part 2 ##########
 def p2(_x=10371555451871 if not USING_EXAMPLE else [2,6,6]):
     starts = [_ for _ in MAP if _[2]=="A"]

@@ -47,12 +47,18 @@ def roll_north(a,y,x):
         a[y,x] = ASH
         y -= 1
 
-
 def tilt_north(m):
     """roll all round rocks north starting from top"""
     for y in range(H):
         for x in np.where(m[y]==ROLL)[0]:
             roll_north(m,y,x)
+
+def xtilt_north(m):
+    """roll all round rocks north starting from top
+    why is this slower??"""
+    yx = np.where(m==ROLL)
+    for y,x in zip(yx[0],yx[1]):
+        roll_north(m,y,x)
 
 def p1(expect=105461 if not USING_EXAMPLE else 136):
     tilt_north(MAP)
@@ -87,8 +93,6 @@ def tilt_west(m):
     for x in range(W):
         for y in np.where(m[:,x]==ROLL)[0]:
             roll_west(m,y,x)
-
-
 
 def spin():
     """spin the platform once and return hash of its state"""
