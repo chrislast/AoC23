@@ -145,7 +145,6 @@ def p1(expect=859 if not USING_EXAMPLE else 102):
     return shortest(PATH1, p2=False)
 
 ######## Part 2 ##########
-
 def p2(expect=0 if not USING_EXAMPLE else 0):
     return shortest(PATH2, p2=True)
 
